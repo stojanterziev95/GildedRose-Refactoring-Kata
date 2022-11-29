@@ -13,4 +13,4 @@ For e.g. 10 days:
 ```
 ./gradlew -q text --args 10
 ```
-#### Test commit
+### Comments added for better understanding of what the updateQuality() method is doing
