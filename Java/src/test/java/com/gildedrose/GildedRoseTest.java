@@ -54,4 +54,48 @@ class GildedRoseTest {
         assertEquals(50,item.quality);
     }
 
+    @Test
+    void item_quality_decreases_sellIn_decrease_each_day(){
+        int start_sellIn = 6;
+        int start_quality = 8;
+        final Item item = new Item("Some text",start_sellIn,start_quality);
+        GildedRose app = new GildedRose(new Item[]{item});
+
+        app.updateQuality();
+        assertEquals(item.sellIn,start_sellIn-1);
+        assertEquals(item.quality,start_quality -1);
+    }
+
+    @Test
+    void items_decrease_each_day(){
+        Item first_Item = new Item("First item text", 5,4);
+        Item second_Item = new Item("Second item text",3,2);
+        GildedRose app = new GildedRose(new Item[]{first_Item,second_Item});
+
+        app.updateQuality();
+
+        assertEquals(first_Item.sellIn,4);
+        assertEquals(first_Item.quality,3);
+        assertEquals(second_Item.sellIn,2);
+        assertEquals(second_Item.quality,1);
+    }
+
+    @Test
+    void quality_of_item_decreases_by_1_on_1_day_left(){
+        Item item = new Item("Some text",1,5);
+        GildedRose app = new GildedRose(new Item[]{item});
+
+        app.updateQuality();
+        assertEquals(item.quality,4);
+    }
+
+    @Test
+    void item_qualite_decreases_twice_faster_past_time_sellIn(){
+        Item item = new Item("Some text",-1,5);
+        GildedRose app = new GildedRose(new Item[]{item});
+
+        app.updateQuality();
+        assertEquals(item.quality,3);
+    }
+
 }
