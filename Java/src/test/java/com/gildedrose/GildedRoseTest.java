@@ -29,26 +29,17 @@ class GildedRoseTest {
 
     @Test
     void item_quality_increases() {
-        Item item = new Item("Aged Brie", 5, 6);
+        Item item = new Item("Aged Brie", 6, 7);
         GildedRose app = new GildedRose(new Item[] { item });
 
         app.updateQuality();
-        assertEquals(7,item.quality);
+        assertEquals(8,item.quality);
     }
 
     @Test
-    void item_quality_increases_from_49_to_50(){
-        Item item = new Item("Aged Brie",5,49);
-        GildedRose app = new GildedRose(new Item[]{item});
-
-        app.updateQuality();
-        assertEquals(50,item.quality);
-    }
-
-    @Test
-    void item_quality_does_not_exceed_50(){
+    void item_quality_does_not_increases_from_50_to_51(){
         Item item = new Item("Aged Brie",5,50);
-        GildedRose app = new GildedRose(new Item[] {item});
+        GildedRose app = new GildedRose(new Item[]{item});
 
         app.updateQuality();
         assertEquals(50,item.quality);
@@ -64,6 +55,16 @@ class GildedRoseTest {
         app.updateQuality();
         assertEquals(item.sellIn,start_sellIn-1);
         assertEquals(item.quality,start_quality -1);
+    }
+
+    @Test
+    void item_quality_increases_twice_fase_past_sellIn_time(){
+        Item item = new Item("Aged Brie",0,7);
+        GildedRose app = new GildedRose(new Item[]{item});
+
+        app.updateQuality();
+
+        assertEquals(9,item.quality);
     }
 
     @Test
@@ -90,12 +91,23 @@ class GildedRoseTest {
     }
 
     @Test
-    void item_qualite_decreases_twice_faster_past_time_sellIn(){
+    void item_quality_over_50_past_sellin_time_does_not_increase(){
+        Item item = new Item("Aged Brie",0,50);
+        GildedRose app = new GildedRose(new Item[]{item});
+
+        app.updateQuality();
+        assertEquals(50,item.quality);
+    }
+
+    @Test
+    void item_quality_decreases_twice_faster_past_time_sellIn(){
         Item item = new Item("Some text",-1,5);
         GildedRose app = new GildedRose(new Item[]{item});
 
         app.updateQuality();
         assertEquals(item.quality,3);
     }
+
+
 
 }
