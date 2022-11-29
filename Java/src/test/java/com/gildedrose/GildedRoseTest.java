@@ -90,6 +90,7 @@ class GildedRoseTest {
         assertEquals(item.quality,4);
     }
 
+
     @Test
     void item_quality_over_50_past_sellin_time_does_not_increase(){
         Item item = new Item("Aged Brie",0,50);
@@ -108,6 +109,21 @@ class GildedRoseTest {
         assertEquals(item.quality,3);
     }
 
+    @Test
+    void items_never_decrease_quality(){
+        Item item = new Item("Sulfuras, Hand of Ragnaros",-1,50);
+        GildedRose app = new GildedRose(new Item[]{item});
 
+        app.updateQuality();
+        assertEquals(50,item.quality);
+    }
+
+    @Test
+    void items_where_sellIn_is_negative_never_sold(){
+        Item item = new Item("Sulfuras, Hand of Ragnaros",-1,50);
+        GildedRose app = new GildedRose(new Item[]{item});
+        app.updateQuality();
+        assertEquals(-1,item.sellIn);
+    }
 
 }
