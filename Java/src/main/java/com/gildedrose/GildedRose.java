@@ -10,7 +10,8 @@ class GildedRose {
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             //Item is not "Brie" and item is not "Backstage passes"
-            if (!items[i].name.equals("Aged Brie") && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (!items[i].name.equals("Aged Brie")
+                && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 //the quality of the i-th item is > 0
                 if (items[i].quality > 0) {
                     //item is not "Sulfuras"
