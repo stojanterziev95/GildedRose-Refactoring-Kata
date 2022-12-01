@@ -12,9 +12,4 @@ public class Conjured extends wrappedItem {
         item.quality = Math.max(0, item.quality-2);
     }
 
-//    @Override
-//    protected void qualityUpdate() {
-//        qualityDecrease();
-//        qualityDecrease();
-//    }
 }
