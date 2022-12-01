@@ -162,4 +162,22 @@ class GildedRoseTest {
         assertEquals(0,item.quality);
     }
 
+    @Test
+    void conjured_items_decrease_by_two_in_quality(){
+        Item item = new Item("Conjured",10,20);
+        GildedRose app = new GildedRose(new Item[]{item});
+
+        app.update();
+        assertEquals(18,item.quality);
+    }
+
+    @Test
+    void conjured_items_decrease_by_four_in_quality_when_expired(){
+        Item item = new Item("Conjured",0,10);
+        GildedRose app = new GildedRose(new Item[]{item});
+
+        app.update();
+        assertEquals(6,item.quality);
+    }
+
 }

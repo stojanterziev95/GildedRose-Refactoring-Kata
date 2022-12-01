@@ -1,9 +1,6 @@
 package com.gildedrose;
 
 public class wrappedItem {
-    public static final String AGED_BRIE = "Aged Brie";
-    public static final String BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
-    public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
     protected Item item;
 
     public wrappedItem(Item item) {
@@ -11,46 +8,39 @@ public class wrappedItem {
     }
 
     public static wrappedItem create(Item item) {
-        if (item.name.equals(AGED_BRIE))
+        if (item.name.equals(AgedBrie.AGED_BRIE))
             return new AgedBrie(item);
-        if (item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT))
+        if (item.name.equals(BackstagePasses.BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT))
             return new BackstagePasses(item);
+        if (item.name.equals(Sulfuras.SULFURAS_HAND_OF_RAGNAROS))
+            return new Sulfuras(item);
+        if(item.name.equals(Conjured.CONJURED))
+            return new Conjured(item);
         return new wrappedItem(item);
     }
 
     protected void qualityDecrease() {
         if (item.quality > 0) {
-            item.quality = item.quality - 1;
+            item.quality --;
         }
     }
 
     protected void qualityIncrease() {
         if (item.quality < 50) {
-            item.quality = item.quality + 1;
+            item.quality ++;
         }
     }
 
     protected void expiredProcess() {
-        if (item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT)) {
-            item.quality = 0;
-        } else if (item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-            return;
-        } else {
             qualityDecrease();
-        }
     }
 
     protected void sellInUpdate() {
-        if (item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-            return;
-        }
         item.sellIn--;
     }
 
     protected void qualityUpdate() {
-        if (item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-            return;
-        } else qualityDecrease();
+        qualityDecrease();
     }
 
     protected boolean isExpired() {
