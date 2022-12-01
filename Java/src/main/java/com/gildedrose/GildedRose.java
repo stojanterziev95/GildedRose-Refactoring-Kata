@@ -9,7 +9,7 @@ class GildedRose {
 
     public void update() {
         for (Item item : items) {
-            new wrappedItem(item).update_daily();
+            wrappedItem.create(item).update_daily();
         }
     }
 

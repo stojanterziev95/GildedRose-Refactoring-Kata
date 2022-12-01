@@ -1,10 +1,17 @@
 package com.gildedrose;
 
 public class wrappedItem {
+    public static final String AGED_BRIE = "Aged Brie";
+    public static final String BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
+    public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
     private Item item;
 
     public wrappedItem(Item item) {
         this.item = item;
+    }
+
+    public static wrappedItem create(Item item) {
+        return new wrappedItem(item);
     }
 
     protected void qualityDecrease(Item item) {
@@ -20,11 +27,11 @@ public class wrappedItem {
     }
 
     protected void expiredProcess(Item ite) {
-        if (item.name.equals("Aged Brie")) {
+        if (item.name.equals(AGED_BRIE)) {
             qualityIncrease(item);
-        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+        } else if (item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT)) {
             item.quality = 0;
-        } else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+        } else if (item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
             return;
         } else {
             qualityDecrease(item);
@@ -32,16 +39,16 @@ public class wrappedItem {
     }
 
     protected void sellInUpdate(Item item) {
-        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+        if (item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
             return;
         }
         item.sellIn--;
     }
 
     protected void qualityUpdate(Item item) {
-        if (item.name.equals("Aged Brie")) {
+        if (item.name.equals(AGED_BRIE)) {
             qualityIncrease(item);
-        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+        } else if (item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL_80_ETC_CONCERT)) {
             qualityIncrease(item);
             if (item.sellIn < 11) {
                 qualityIncrease(item);
@@ -49,7 +56,7 @@ public class wrappedItem {
             if (item.sellIn < 6) {
                 qualityIncrease(item);
             }
-        } else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+        } else if (item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
             return;
         } else qualityDecrease(item);
     }
